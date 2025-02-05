@@ -1,6 +1,5 @@
 package org.chess;
 
-import org.chess.model.Game;
 import org.chess.view.GameUI;
 
 public class Main {
