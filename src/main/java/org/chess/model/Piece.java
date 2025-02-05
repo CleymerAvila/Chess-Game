@@ -1,29 +1,40 @@
 package org.chess.model;
 
+import org.chess.view.Board;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-public abstract class Piece {
-    private Color color;
-    private int row;
-    private int col;
+public class Piece {
+    protected int col;
+    protected int row;
+    protected int xPosition, yPosition;
+    protected String name;
+    protected boolean isWhite;
+    protected int value;
 
-    public Piece(Color color, int row, int col){
-        this.color = color;
-        this.row = row;
-        this.col = col;
+    public Piece(Board board, int col, int row, boolean isWhite ){
+        this.board = board;
     }
 
-    // Método abstracto para validar movimientos
-    public abstract boolean isValidMove(int targetRow, int targetCol, Board board);
-
-    public abstract String getSymbol();
-
-    // Getters y Setters
-    public Color getColor() {return color;};
-    public int getRow(){return row;};
-    public int getCol(){return col;};
-    public void setPosition(int row, int col){
-        this.row= row;
-        this.col = col;
+    BufferedImage sheet;
+    {
+        try {
+            sheet = ImageIO.read(ClassLoader.getSystemResource("chesspieces.png"));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
+
+    Board board;
+    Image sprite;
+    protected int sheetScale = sheet.getWidth() / 6;
+
+    public void paint(Graphics2D g2d){
+      g2d.drawImage(sprite, xPosition, yPosition, null);
+    }
+
 }

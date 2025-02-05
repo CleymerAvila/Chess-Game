@@ -1,27 +1,20 @@
 package org.chess.model;
 
-import java.awt.*;
+
+import org.chess.view.Board;
+
+import java.awt.image.BufferedImage;
 
 public class Pawn extends Piece{
 
-    public Pawn(Color color, int row, int col){
-        super(color, row, col);
+    public Pawn(Board board, int col, int row, boolean isWhite) {
+        super(board, col, row, isWhite);
+        this.name = "Pawn";
+        this.isWhite = isWhite;
+        this.xPosition = col * board.titleSize;
+        this.yPosition = row * board.titleSize;
+
+        this.sprite = sheet.getSubimage(5 * sheetScale , isWhite ? 0 : sheetScale, sheetScale, sheetScale)
+                .getScaledInstance(board.titleSize, board.titleSize, BufferedImage.SCALE_SMOOTH);
     }
-    @Override
-    public boolean isValidMove(int targetRow, int targetCol, Board board) {
-        int direction = (getColor() ==Color.WHITE) ? -1 : 1; // direccion según el color de la pieza
-        int startRow = getRow();
-
-        if (targetCol == getCol() && targetRow == startRow + direction){
-            return board.isEmpty(targetRow, targetCol);
-        }
-        return false;
-    }
-
-    @Override
-    public String getSymbol() {
-        return (getColor() == Color.WHITE) ? "♙" : "♟";
-    }
-
-
 }
