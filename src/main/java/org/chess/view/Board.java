@@ -1,7 +1,6 @@
 package org.chess.view;
 
-import org.chess.model.Pawn;
-import org.chess.model.Piece;
+import org.chess.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +15,35 @@ public class Board extends JPanel {
     public Board(){
         this.setPreferredSize(new Dimension(titleSize * COLS, titleSize * ROWS));
         setBackground(new Color(37, 36, 34));
-        addPieces();
+        addAllPieces();
     }
 
-    public void addPieces(){
+    public void addAllPieces(){
+        // Add all White pieces
+        pieces.add(new King(this, 3, 0 , false));
+        pieces.add(new Rook(this, 0, 0, false));
+        pieces.add(new Rook(this, 7, 0, false));
+        pieces.add(new Knight(this, 1, 0, false));
+        pieces.add(new Knight(this, 6, 0, false));
+        pieces.add(new Bishop(this, 2, 0, false));
+        pieces.add(new Bishop(this, 5, 0, false));
+        pieces.add(new Queen(this, 4, 0, false));
+        // add all Pawn pieces
         for(int i= 0; i < 8; i++){
             pieces.add(new Pawn(this, i, 1, false));
+        }
+        // Add all Black pieces
+        pieces.add(new King(this, 3, 7 , true));
+        pieces.add(new Rook(this, 0, 7, true));
+        pieces.add(new Rook(this, 7, 7, true));
+        pieces.add(new Knight(this, 1, 7, true));
+        pieces.add(new Knight(this, 6, 7, true));
+        pieces.add(new Bishop(this, 2, 7, true));
+        pieces.add(new Bishop(this, 5, 7, true));
+        pieces.add(new Queen(this, 4, 7, true));
+        // Add all Pawn Black pieces
+        for(int i= 0; i < 8; i++){
+            pieces.add(new Pawn(this, i, 6, true));
         }
 
     }
