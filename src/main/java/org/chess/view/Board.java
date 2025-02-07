@@ -12,11 +12,15 @@ public class Board extends JPanel {
     public int titleSize = 70;
     final int COLS = 8;
     final int ROWS = 8;
-    ArrayList<Piece> pieces = new ArrayList<>();
+    public Piece selectedPiece;
+    public ArrayList<Piece> pieces = new ArrayList<>();
+    public Input input = new Input(this);
 
     public Board(){
         this.setPreferredSize(new Dimension(titleSize * COLS, titleSize * ROWS));
         setBackground(new Color(37, 36, 34));
+        this.addMouseListener(input);
+        this.addMouseMotionListener(input);
         addAllPieces();
     }
 
@@ -67,5 +71,41 @@ public class Board extends JPanel {
         for(Piece piece : pieces){
             piece.paint(g2d);
         }
+    }
+
+    public Piece getPiece(int col, int row) {
+        for(Piece piece : pieces){
+            if (piece.col == col && piece.row == row){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public void makeMove(Move move){
+        move.piece.col = move.toCol;
+        move.piece.row = move.toRow;
+        move.piece.xPosition = move.toCol * titleSize;
+        move.piece.yPosition = move.toRow * titleSize;
+
+        capturePiece(move);
+    }
+    public boolean isValidMove(Move move){
+        if (sameTeam(move.piece, move.capture)){
+            return false;
+        }
+        return true;
+    }
+
+    public void capturePiece(Move move){
+        pieces.remove(move.capture);
+    }
+
+    public boolean sameTeam(Piece piece1, Piece piece2){
+        if (piece1 == null || piece2 == null){
+            return false;
+        }
+
+        return piece1.isWhite == piece2.isWhite;
     }
 }
