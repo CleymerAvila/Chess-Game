@@ -1,6 +1,8 @@
 package org.chess.view;
 
-import org.chess.model.*;
+import org.chess.model.Input;
+import org.chess.model.Move;
+import org.chess.model.pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,7 +60,7 @@ public class Board extends JPanel {
         for(int r = 0; r < COLS; r++){
             for(int i= 0; i< ROWS; i++){
                 g2d.setColor((r + i) % 2 == 0 ? new Color(176, 137, 104) : new Color(230, 204, 178));
-                g2d.fillRect(r * titleSize, i * titleSize, titleSize, titleSize);
+                g2d.fillRect(r * titleWidth, i * titleHeight, titleWidth, titleHeight);
             }
         }
 
