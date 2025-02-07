@@ -1,4 +1,4 @@
-package org.chess.model;
+package org.chess.model.pieces;
 
 import org.chess.view.Board;
 

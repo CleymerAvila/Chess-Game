@@ -1,4 +1,4 @@
-package org.chess.model;
+package org.chess.model.pieces;
 
 import org.chess.view.Board;
 
@@ -8,15 +8,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Piece {
-    protected int col;
-    protected int row;
-    protected int xPosition, yPosition;
-    protected String name;
-    protected boolean isWhite;
-    protected int value;
+    public int col;
+    public  int row;
+    public  int xPosition, yPosition;
+    public  String name;
+    public  boolean isWhite;
+    public int value;
 
-    public Piece(Board board, int col, int row, boolean isWhite ){
+    public Piece(Board board, int col, int row, boolean isWhite ) {
         this.board = board;
+        this.col = col;
+        this.row = row;
+        this.isWhite = isWhite;
     }
 
     BufferedImage sheet;

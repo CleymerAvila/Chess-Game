@@ -1,19 +1,20 @@
-package org.chess.model;
+package org.chess.model.pieces;
+
 
 import org.chess.view.Board;
 
 import java.awt.image.BufferedImage;
 
-public class Rook extends Piece{
+public class Pawn extends Piece{
 
-    public Rook(Board board, int col, int row, boolean isWhite) {
+    public Pawn(Board board, int col, int row, boolean isWhite) {
         super(board, col, row, isWhite);
+        this.name = "Pawn";
         this.isWhite = isWhite;
-        this.name = "Rook";
         this.xPosition = col * board.titleSize;
         this.yPosition = row * board.titleSize;
 
-        this.sprite = sheet.getSubimage(4 * sheetScale , isWhite ? 0 : sheetScale, sheetScale, sheetScale)
+        this.sprite = sheet.getSubimage(5 * sheetScale , isWhite ? 0 : sheetScale, sheetScale, sheetScale)
                 .getScaledInstance(board.titleSize, board.titleSize, BufferedImage.SCALE_SMOOTH);
     }
 }
